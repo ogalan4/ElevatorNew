@@ -1,0 +1,8 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+	logallrefupdates = false
+[remote "Elevator"]
+	url = https://github.com/ogalan4/Elevator.git
+	fetch = +refs/heads/*:refs/remotes/Elevator/*
