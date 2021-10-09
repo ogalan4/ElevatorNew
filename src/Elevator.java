@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.PortUnreachableException;
 
 public class Elevator extends Thread {
     public int currentFloor = 1;
@@ -22,8 +23,8 @@ public class Elevator extends Thread {
         } else if (currentFloor > wishedFloor && wishedFloor != 0) {
             moveDown();
         }
-        currentFloor = wishedFloor;
-        wishedFloor = 0;
+//        currentFloor = wishedFloor;
+//        wishedFloor = 0;
     }
 
     public void waitUntilUserInputNumber() {
@@ -45,10 +46,11 @@ public class Elevator extends Thread {
             welcomeOnFloorBDLogicUp(i);
             if (Buillding.numberOfWishedFloor == 0) {
                 askSomebodyCallElevator();
-            } else if (currentFloor == wishedFloor) askNumberOfWishedFloor();
+            }
         }
         if (buillding.isWelcomeByLogic == false) {
-            welcomeOnFloor();
+            actionByElevatorGet();
+            compareGoalsUp();
         }
     }
 
@@ -56,24 +58,33 @@ public class Elevator extends Thread {
         System.out.println("----------------------------------------------------------------------------");
         System.out.println("|  The elevator is moving down                                             |");
         System.out.println("----------------------------------------------------------------------------");
-        for (int i = currentFloor; i > wishedFloor-1; i--) {
+        for (int i = currentFloor; i > wishedFloor; i--) {
             welcomeOnFloorBDLogicDown(i);
             if (Buillding.numberOfWishedFloor == 0) {
                 askSomebodyCallElevator();
-            } else if (currentFloor == wishedFloor) askNumberOfWishedFloor();
+            }
         }
         if (buillding.isWelcomeByLogic == false) {
-            welcomeOnFloor();
+            actionByElevatorGet();
+            compareGoalsDown();
         }
+    }
+
+    public void actionByElevatorGet() {
+        InputNumbersLogic inputNumbersLogic = new InputNumbersLogic();
+        welcomeOnFloor();
+        currentFloor = wishedFloor;
+        askNumberOfWishedFloor();
+        inputNumbersLogic.waitFourSeconds();
+        wishedFloor=temp;
     }
 
     public void welcomeOnFloorBDLogicUp(int i) {
         System.out.println("----------------------------------------------------------------------------");
         System.out.println("|  Elevator is moving through " + i + " floor                                      |");
         System.out.println("----------------------------------------------------------------------------");
-        if (i + 1 == Buillding.numberOfWishedFloor && Buillding.numberOfWishedFloor != 0) {
+        if ((i + 1) == Buillding.numberOfWishedFloor && Buillding.numberOfWishedFloor != 0) {
             buillding.welcomeONFloorByDyrection();
-
         }
     }
 
@@ -81,9 +92,22 @@ public class Elevator extends Thread {
         System.out.println("----------------------------------------------------------------------------");
         System.out.println("|  Elevator is moving through " + i + " floor                                      |");
         System.out.println("----------------------------------------------------------------------------");
-        if (i-1  == Buillding.numberOfWishedFloor && Buillding.numberOfWishedFloor != 0) {
+        if ((i - 1) == Buillding.numberOfWishedFloor && Buillding.numberOfWishedFloor != 0) {
             buillding.welcomeONFloorByDyrection();
+        }
+    }
 
+    public void compareGoalsUp() {
+        if (currentFloor<wishedFloor&&wishedFloor < Buillding.numberOfWishedFloor) {
+            wishedFloor = Buillding.numberOfWishedFloor;
+            moveUp();
+        }
+    }
+
+    public void compareGoalsDown() {
+        if ((currentFloor>wishedFloor&&wishedFloor > Buillding.numberOfWishedFloor)||(wishedFloor==0&&currentFloor>Buillding.numberOfWishedFloor)) {
+            wishedFloor = Buillding.numberOfWishedFloor;
+            moveDown();
         }
     }
 
@@ -96,7 +120,7 @@ public class Elevator extends Thread {
             temp = 0;
             if (Buillding.numberOfWishedFloor != 0) {
                 buillding.isWelcomeByLogic = false;
-            } else buillding.isWelcomeByLogic = true;
+            }
         }
     }
 
@@ -122,7 +146,6 @@ public class Elevator extends Thread {
             temp = 0;
             ascRetryInputLogic();
             inputNumbersLogic.waitFourSeconds();
-
         }
     }
 

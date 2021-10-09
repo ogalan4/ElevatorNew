@@ -10,11 +10,12 @@ public class Main {
 
         while (true) {
                 if (elevator.temp != 100) {
-                InputNumbersLogic inputNumbersLogic1=new InputNumbersLogic();
+//                InputNumbersLogic inputNumbersLogic1=new InputNumbersLogic();
                 elevator.waitForAnyUserAcrion();
                 elevator.move();
-                elevator.askNumberOfWishedFloor();
-                inputNumbersLogic1.waitFourSeconds();
+//                elevator.askNumberOfWishedFloor();
+//                inputNumbersLogic1.waitFourSeconds();
+
             }
         }
     }
