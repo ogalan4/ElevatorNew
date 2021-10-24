@@ -10,7 +10,7 @@ public class InputNumbersLogic extends Thread {
     public void waitFourSeconds() {
         start();
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -27,6 +27,7 @@ public class InputNumbersLogic extends Thread {
 
         elevator.checkExit();
         elevator.checkCorrectNumber();
+        elevator.checkSameNumber();
     }
 }
 

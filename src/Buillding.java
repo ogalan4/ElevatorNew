@@ -5,6 +5,7 @@ public class Buillding {
     public static int countOfFloors;
     public static int numberOfWishedFloor;
     public boolean isWelcomeByLogic = false;
+    public boolean isButtonPreset=false;
 
     public void setCountOfFloors() {
         System.out.println("----------------------------------------------------------------------------");
@@ -24,6 +25,7 @@ public class Buillding {
         System.out.println("|  Input the number of floor, where you want to get elevator, please       |");
         System.out.println("|  If you want to quit the program, input 100                              |");
         System.out.println("----------------------------------------------------------------------------");
+        isButtonPreset=true;
     }
 
     public void somebodyCallElevator() {
