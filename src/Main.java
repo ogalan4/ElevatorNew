@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
         Elevator elevator = new Elevator();
@@ -14,9 +16,10 @@ public class Main {
                 inputNumbersLogic.waitFourSeconds();
                 elevator.wishedFloor= Elevator.temp;
                 elevator.move();
-                if (buillding.isButtonPreset=true){
-                    elevator.askNumberOfWishedFloor();
-                }
+//                elevator.currentFloor=elevator.wishedFloor;
+//                if (buillding.isButtonPreset=true){
+//                    elevator.askNumberOfWishedFloor();
+//                }
             }
         }
 

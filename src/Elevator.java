@@ -3,16 +3,37 @@ public class Elevator extends Thread {
     public int currentFloor = 1;
     public int wishedFloor = 0;
     public static int temp;
-
+    public static int verificationTemp;
     Buillding buillding = new Buillding();
 
     public void move() {
-        if (currentFloor < wishedFloor) {
+        if (currentFloor < wishedFloor && wishedFloor != 0) {
             moveUp();
-        } else if (currentFloor > wishedFloor) {
+        } else if (currentFloor > wishedFloor && wishedFloor != 0) {
             moveDown();
         }
-        welcomeOnFloor();
+        waitUntilSomeAction();
+     }
+
+    public void waitUntilSomeAction(){
+        if (wishedFloor == 0) {
+            System.out.println("----------------------------------------------------------------------------");
+            System.out.println("|  The elevator is not moving now                                          |");
+            System.out.println("|  And nobody wants to get elevator on some floor                          |");
+            System.out.println("|  Input the number of floor, where you want to get elevator, please       |");
+            System.out.println("|  If you want to quit the program, input 100                              |");
+            System.out.println("----------------------------------------------------------------------------");
+//            while (true) {
+//                if (buillding.isButtonPreset == false) {
+//                    InputNumbersLogic inputNumbersLogic = new InputNumbersLogic();
+//                    inputNumbersLogic.waitFourSeconds();
+//                    Buillding.numberOfWishedFloor = temp;
+//                    buillding.isButtonPreset = true;
+//                }
+//                break;
+//            }
+        }
+        else welcomeOnFloor();
     }
 
     public void moveUp() {
@@ -26,8 +47,9 @@ public class Elevator extends Thread {
             somebodyElseLogic();
             compareGoalsUp();
             checkFloorByDirection(i);
-            currentFloor = wishedFloor;
+
         }
+        currentFloor = wishedFloor;
     }
 
     public void somebodyElseLogic() {
@@ -37,6 +59,7 @@ public class Elevator extends Thread {
                 buillding.somebodyCallElevator();
                 inputNumbersLogic.waitFourSeconds();
                 Buillding.numberOfWishedFloor = temp;
+                buillding.isButtonPreset = true;
             }
             break;
         }
@@ -47,6 +70,7 @@ public class Elevator extends Thread {
             temp = wishedFloor;
             wishedFloor = Buillding.numberOfWishedFloor;
             Buillding.numberOfWishedFloor = temp;
+            temp = wishedFloor;
         }
     }
 
@@ -55,24 +79,29 @@ public class Elevator extends Thread {
             temp = wishedFloor;
             wishedFloor = Buillding.numberOfWishedFloor;
             Buillding.numberOfWishedFloor = temp;
+            temp = wishedFloor;
         }
     }
 
     public void checkFloorByDirection(int i) {
+        InputNumbersLogic inputNumbersLogic = new InputNumbersLogic();
         if (currentFloor < wishedFloor) {
             if ((i + 1) == Buillding.numberOfWishedFloor) {
-                InputNumbersLogic inputNumbersLogic=new InputNumbersLogic();
                 currentFloor = (i + 1);
                 welcomeOnFloor();
-                buillding.isButtonPreset=false;
                 askNumberOfWishedFloor();
                 inputNumbersLogic.waitFourSeconds();
                 Buillding.numberOfWishedFloor = temp;
+                buillding.isButtonPreset = true;
             }
         } else if (currentFloor > wishedFloor) {
             if ((i - 1) == Buillding.numberOfWishedFloor) {
                 currentFloor = (i + 1);
                 welcomeOnFloor();
+                askNumberOfWishedFloor();
+                inputNumbersLogic.waitFourSeconds();
+                Buillding.numberOfWishedFloor = temp;
+                buillding.isButtonPreset = true;
             }
         }
     }
@@ -88,9 +117,8 @@ public class Elevator extends Thread {
             somebodyElseLogic();
             compareGoalsDown();
             checkFloorByDirection(i);
-            currentFloor = wishedFloor;
-
         }
+        currentFloor = wishedFloor;
     }
 
 //    public void waitForAnyUserAction() {
@@ -254,6 +282,6 @@ public class Elevator extends Thread {
             System.out.println("|          Try again, please                                               |");
             System.out.println("----------------------------------------------------------------------------");
             inputNumbersLogic.waitFourSeconds();
-        }
+            }
     }
 }
