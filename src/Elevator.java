@@ -23,15 +23,7 @@ public class Elevator extends Thread {
             System.out.println("|  Input the number of floor, where you want to get elevator, please       |");
             System.out.println("|  If you want to quit the program, input 100                              |");
             System.out.println("----------------------------------------------------------------------------");
-//            while (true) {
-//                if (buillding.isButtonPreset == false) {
-//                    InputNumbersLogic inputNumbersLogic = new InputNumbersLogic();
-//                    inputNumbersLogic.waitFourSeconds();
-//                    Buillding.numberOfWishedFloor = temp;
-//                    buillding.isButtonPreset = true;
-//                }
-//                break;
-//            }
+
         }
         else welcomeOnFloor();
     }
@@ -50,6 +42,7 @@ public class Elevator extends Thread {
 
         }
         currentFloor = wishedFloor;
+        wishedFloor=0;
     }
 
     public void somebodyElseLogic() {
@@ -119,121 +112,8 @@ public class Elevator extends Thread {
             checkFloorByDirection(i);
         }
         currentFloor = wishedFloor;
+        wishedFloor=0;
     }
-
-//    public void waitForAnyUserAction() {
-//        if (wishedFloor == 0 && Building.numberOfWishedFloor == 0) {
-//            waitUntilUserInputNumber();
-//        }
-//    }
-//
-//    public void move() {
-//        wishedFloor = temp;
-//        if (currentFloor < wishedFloor && wishedFloor != 0) {
-//            moveUp();
-//        } else if (currentFloor > wishedFloor && wishedFloor != 0) {
-//            moveDown();
-//        }
-////        currentFloor = wishedFloor;
-////        wishedFloor = 0;
-//    }
-//
-//    public void waitUntilUserInputNumber() {
-//        InputNumbersLogic inputNumbersLogic = new InputNumbersLogic();
-//        System.out.println("------------------------------------------------------------------------------");
-//        System.out.println("|  The elevator is not moving right nov                                      |");
-//        System.out.println("|  Nobody asks the elevator on some floor and nobody wants to get somewhere  |");
-//        System.out.println("------------------------------------------------------------------------------");
-//        building.callElevator();
-//        inputNumbersLogic.inputNumberOfFloor();
-//        move();
-//    }
-//
-//    public void moveUp() {
-//        System.out.println("----------------------------------------------------------------------------");
-//        System.out.println("|  The elevator is moving up                                               |");
-//        System.out.println("----------------------------------------------------------------------------");
-//        for (int i = currentFloor; i < wishedFloor; i++) {
-//            welcomeOnFloorBDLogicUp(i);
-//            if (Building.numberOfWishedFloor == 0) {
-//                askSomebodyCallElevator();
-//            }
-//        }
-//        if (building.isWelcomeByLogic == false) {
-//            actionByElevatorGet();
-//            compareGoalsUp();
-//        }
-//    }
-//
-//    public void moveDown() {
-//        System.out.println("----------------------------------------------------------------------------");
-//        System.out.println("|  The elevator is moving down                                             |");
-//        System.out.println("----------------------------------------------------------------------------");
-//        for (int i = currentFloor; i > wishedFloor; i--) {
-//            welcomeOnFloorBDLogicDown(i);
-//            if (Building.numberOfWishedFloor == 0) {
-//                askSomebodyCallElevator();
-//            }
-//        }
-//        if (building.isWelcomeByLogic == false) {
-//            actionByElevatorGet();
-//            compareGoalsDown();
-//        }
-//    }
-//
-//    public void actionByElevatorGet() {
-//        InputNumbersLogic inputNumbersLogic = new InputNumbersLogic();
-//        welcomeOnFloor();
-//        currentFloor = wishedFloor;
-//        askNumberOfWishedFloor();
-//        inputNumbersLogic.waitFourSeconds();
-//        wishedFloor=temp;
-//    }
-//
-//    public void welcomeOnFloorBDLogicUp(int i) {
-//        System.out.println("----------------------------------------------------------------------------");
-//        System.out.println("|  Elevator is moving through " + i + " floor                                      |");
-//        System.out.println("----------------------------------------------------------------------------");
-//        if ((i + 1) == Building.numberOfWishedFloor && Building.numberOfWishedFloor != 0) {
-//            building.welcomeONFloorByDirection();
-//        }
-//    }
-//
-//    public void welcomeOnFloorBDLogicDown(int i) {
-//        System.out.println("----------------------------------------------------------------------------");
-//        System.out.println("|  Elevator is moving through " + i + " floor                                      |");
-//        System.out.println("----------------------------------------------------------------------------");
-//        if ((i - 1) == Building.numberOfWishedFloor && Building.numberOfWishedFloor != 0) {
-//            building.welcomeONFloorByDirection();
-//        }
-//    }
-//
-//    public void compareGoalsUp() {
-//        if (currentFloor<wishedFloor&&wishedFloor < Building.numberOfWishedFloor) {
-//            wishedFloor = Building.numberOfWishedFloor;
-//            moveUp();
-//        }
-//    }
-//
-//    public void compareGoalsDown() {
-//        if ((currentFloor>wishedFloor&&wishedFloor > Building.numberOfWishedFloor)||(wishedFloor==0&&currentFloor>Building.numberOfWishedFloor)) {
-//            wishedFloor = Building.numberOfWishedFloor;
-//            moveDown();
-//        }
-//    }
-//
-//    public void askSomebodyCallElevator() {
-//        InputNumbersLogic inputNumbersLogic = new InputNumbersLogic();
-//        if (Building.numberOfWishedFloor == 0) {
-//            building.somebodyCallElevator();
-//            inputNumbersLogic.waitFourSeconds();
-//            Building.numberOfWishedFloor = temp;
-//            temp = 0;
-//            if (Building.numberOfWishedFloor != 0) {
-//                building.isWelcomeByLogic = false;
-//            }
-//        }
-//    }
 
     public void askNumberOfWishedFloor() {
         System.out.println("----------------------------------------------------------------------------");

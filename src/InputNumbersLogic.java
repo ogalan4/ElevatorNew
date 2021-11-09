@@ -1,10 +1,8 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class InputNumbersLogic extends Thread {
-    InputStreamReader ireader=new InputStreamReader(System.in);
-    BufferedReader reader = new BufferedReader(ireader);
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public void run() {
         inputNumberOfFloor();
@@ -17,7 +15,7 @@ public class InputNumbersLogic extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        verificateTemp();
+//        verificateTemp();
     }
 
     public void inputNumberOfFloor() {
@@ -36,11 +34,11 @@ public class InputNumbersLogic extends Thread {
 
     }
 
-    public void verificateTemp(){
-       if (Elevator.verificationTemp==Elevator.temp){
-            Elevator.temp=0;
-            Elevator.verificationTemp=0;
-           }else Elevator.verificationTemp=Elevator.temp;
-            }
+//    public void verificateTemp(){
+//       if (Elevator.verificationTemp==Elevator.temp){
+//            Elevator.temp=0;
+//            Elevator.verificationTemp=0;
+//           }else Elevator.verificationTemp=Elevator.temp;
+//            }
 }
 
