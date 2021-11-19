@@ -30,7 +30,8 @@ public class InputNumbersLogic extends Thread {
 
         elevator.checkExit();
         elevator.checkCorrectNumber();
-        elevator.checkSameNumber();
+
+          elevator.checkSameNumber();
 
     }
 

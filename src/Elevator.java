@@ -1,6 +1,7 @@
+import java.io.IOException;
 
 public class Elevator extends Thread {
-    public int currentFloor = 1;
+    public static int currentFloor = 1;
     public int wishedFloor = 0;
     public static int temp;
     public static int verificationTemp;
@@ -42,7 +43,6 @@ public class Elevator extends Thread {
 
         }
         currentFloor = wishedFloor;
-        wishedFloor=0;
     }
 
     public void somebodyElseLogic() {
@@ -82,6 +82,7 @@ public class Elevator extends Thread {
             if ((i + 1) == Buillding.numberOfWishedFloor) {
                 currentFloor = (i + 1);
                 welcomeOnFloor();
+                Buillding.numberOfWishedFloor=0;
                 askNumberOfWishedFloor();
                 inputNumbersLogic.waitFourSeconds();
                 Buillding.numberOfWishedFloor = temp;
@@ -91,6 +92,7 @@ public class Elevator extends Thread {
             if ((i - 1) == Buillding.numberOfWishedFloor) {
                 currentFloor = (i + 1);
                 welcomeOnFloor();
+                Buillding.numberOfWishedFloor=0;
                 askNumberOfWishedFloor();
                 inputNumbersLogic.waitFourSeconds();
                 Buillding.numberOfWishedFloor = temp;
@@ -101,7 +103,7 @@ public class Elevator extends Thread {
 
     public void moveDown() {
         System.out.println("----------------------------------------------------------------------------");
-        System.out.println("|  The elevator is moving up                                               |");
+        System.out.println("|  The elevator is moving down                                               |");
         System.out.println("----------------------------------------------------------------------------");
         for (int i = currentFloor; i > wishedFloor; i--) {
             System.out.println("----------------------------------------------------------------------------");
@@ -112,8 +114,7 @@ public class Elevator extends Thread {
             checkFloorByDirection(i);
         }
         currentFloor = wishedFloor;
-        wishedFloor=0;
-    }
+         }
 
     public void askNumberOfWishedFloor() {
         System.out.println("----------------------------------------------------------------------------");
@@ -155,13 +156,11 @@ public class Elevator extends Thread {
     }
 
     public void checkSameNumber() {
-        InputNumbersLogic inputNumbersLogic = new InputNumbersLogic();
-        if (currentFloor == temp) {
+      if (temp==currentFloor) {
             System.out.println("----------------------------------------------------------------------------");
             System.out.println("|          You already are on " + currentFloor + " floor                       |");
             System.out.println("|          Try again, please                                               |");
             System.out.println("----------------------------------------------------------------------------");
-            inputNumbersLogic.waitFourSeconds();
             }
     }
 }
