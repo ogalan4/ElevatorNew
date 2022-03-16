@@ -1,10 +1,11 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class InputNumbersLogic extends Thread {
-    InputStreamReader ireader=new InputStreamReader(System.in);
-    BufferedReader reader = new BufferedReader(ireader);
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    Elevator elevator = new Elevator();
+    Building building = new Building();
+    public static int temp;
 
     public void run() {
         inputNumberOfFloor();
@@ -13,34 +14,57 @@ public class InputNumbersLogic extends Thread {
     public void waitFourSeconds() {
         start();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        verificateTemp();
+        checkExit();
+        checkCorrectNumber();
+        checkSameNumber();
     }
 
     public void inputNumberOfFloor() {
-        Elevator elevator = new Elevator();
-                try {
-            Elevator.temp = Integer.parseInt(reader.readLine());
-            System.out.println(Elevator.temp);
-
+        try {
+            temp = Integer.parseInt(reader.readLine());
+            System.out.println(temp);
         } catch (Exception e) {
             System.out.println("Only numeric values are allowed");
         }
-
-        elevator.checkExit();
-        elevator.checkCorrectNumber();
-        elevator.checkSameNumber();
-
     }
 
-    public void verificateTemp(){
-       if (Elevator.verificationTemp==Elevator.temp){
-            Elevator.temp=0;
-            Elevator.verificationTemp=0;
-           }else Elevator.verificationTemp=Elevator.temp;
-            }
+    public void checkCorrectNumber() {
+        InputNumbersLogic inputNumbersLogic = new InputNumbersLogic();
+        if (temp < 1 || temp > Building.countOfFloors) {
+            System.out.println("The number should be between 1 and " + Building.countOfFloors);
+            temp = 0;
+            ascRetryInputLogic();
+            inputNumbersLogic.waitFourSeconds();
+        }
+    }
+
+    public void ascRetryInputLogic() {
+        if (Building.numberOfWishedFloor == 0) {
+            building.callElevator();
+        } else {
+            elevator.askNumberOfWishedFloor();
+        }
+    }
+
+    public void checkExit() {
+        if (temp == 100) {
+            System.exit(0);
+        }
+    }
+
+    public void checkSameNumber() {
+        InputNumbersLogic inputNumbersLogic = new InputNumbersLogic();
+        if (Elevator.currentFloor == temp) {
+            System.out.println("----------------------------------------------------------------------------");
+            System.out.println("|          You already are on " + Elevator.currentFloor + " floor                       |");
+            System.out.println("|          Try again, please                                               |");
+            System.out.println("----------------------------------------------------------------------------");
+            inputNumbersLogic.waitFourSeconds();
+        }
+    }
 }
 
